@@ -8,12 +8,12 @@ logs = [
     ("anna", "d2", "view")
 ]
 
-action_count = {}
-days = {}
+user_action_count = {}
+user_days = {}
 user_actions = {}
 
 for name, day, action in logs:
-    action_count[name] = action_count.get(name, 0) + 1
+    user_action_count[name] = user_action_count.get(name, 0) + 1
 
     if name not in user_actions:
         user_actions[name] = set()
@@ -25,4 +25,4 @@ for name, action in user_actions.items():
     if "error" in action and "login" not in action:
         user_errors.append(name)
       
-print(action_count, user_errors, user_actions)
+print(user_action_count, user_errors, user_actions)
