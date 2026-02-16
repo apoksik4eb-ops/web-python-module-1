@@ -70,5 +70,7 @@ for user, word in unique_word.items():
         max_unique_word = user
         max_count_unique_word = len(word)
 
+all_unique_word = set.intersection(*unique_word.values())
+
 print(count_messages, unique_word, max_count_word, max_unique_word, all_unique_word)
 
