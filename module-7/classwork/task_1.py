@@ -60,23 +60,39 @@ with open("inventory.txt", "w", encoding="utf-8") as file:
       file.write("2024-01-05,банан,OUT,40\n")
       file.write("2024-01-06,яблоко,OUT,5")
 
+ins, outs, result = {}, {}, {}
+in_prod, out_prod = set(), set()
+result_prod = []
 
 with open("inventory.txt", "r", encoding="utf-8") as file:
    for line in file:
       date, product, operation, quantity = line.split(",")
+      quantity = int(quantity)
 
-      ins = {}
-      outs = {}
-
-      for item in line:
-         ins.setdefault(item["product"], 0)
-         if "in" == operation:
-            ins[operation] += item["quantity"]
-         outs.setdefault(item["product"], 0)
-         if "out" == operation:
-            outs[operation] += item["quantity"]
-      print(ins, outs)
-
+      ins.setdefault(product, 0)
+      if operation == "IN":
+         ins[product] += quantity
+         in_prod.add(product)
       
+      outs.setdefault(product, 0)
+      if operation == "OUT":
+         outs[product] += quantity
+         out_prod.add(product)
 
-      
+      result[product] = ins[product] - outs[product]
+       
+print(ins, outs, result)
+
+for product, quantity in result.items():
+   if quantity < 0:
+      print(product, quantity)
+
+for product in out_prod:
+   if product not in in_prod:
+      result_prod.append(product)
+if len(result_prod) == 0:
+   print("пусто")
+else:
+   print(result_prod)
+
+
