@@ -60,9 +60,9 @@ with open("inventory.txt", "w", encoding="utf-8") as file:
       file.write("2024-01-05,банан,OUT,40\n")
       file.write("2024-01-06,яблоко,OUT,5")
 
-ins, outs, result = {}, {}, {}
+ins, outs, result, max_in, max_out = {}, {}, {}, {}, {}
 in_prod, out_prod = set(), set()
-result_prod = []
+result_prod, date_apple = [], []
 
 with open("inventory.txt", "r", encoding="utf-8") as file:
    for line in file:
@@ -80,12 +80,14 @@ with open("inventory.txt", "r", encoding="utf-8") as file:
          out_prod.add(product)
 
       result[product] = ins[product] - outs[product]
-       
-print(ins, outs, result)
+      
+      if product == "яблоко":
+         date_apple.append(date)
 
+negativ_products = []
 for product, quantity in result.items():
    if quantity < 0:
-      print(product, quantity)
+      negativ_products.append(product)
 
 for product in out_prod:
    if product not in in_prod:
@@ -95,4 +97,45 @@ if len(result_prod) == 0:
 else:
    print(result_prod)
 
+max_in_fruit = None
+max_in_count = 0
+for fruit, count in ins.items():
+   if count > max_in_count:
+      max_in_fruit = fruit
+      max_in_count = count
+max_in[max_in_fruit] = max_in_count
 
+max_out_fruit = None
+max_out_count = 0
+for fruit, count in outs.items():
+   if count > max_out_count:
+      max_out_fruit = fruit
+      max_out_count = count
+max_out[max_out_fruit] = max_out_count
+
+with open("report.txt", "w", encoding="utf-8") as file:
+   file.write("ОТЧЁТ ПО СКЛАДУ:\n")
+   file.write("- Итоговые остатки\n")
+   for key, value in result.items():
+      file.write(f"Товар {key} остаток = {value} шт.\n")
+   file.write("- Общее поступление\n")
+   for key, value in ins.items():
+      file.write(f"Товар {key} поступление = {value} шт.\n")
+   file.write("- Общая отгрузка\n")   
+   for key, value in outs.items():
+      file.write(f"Товар {key} отгрузка = {value} шт.\n")
+   file.write("- Товары с отрицательным остатком:\n")
+   for fruit in negativ_products:
+      file.write(f"{fruit}\n")
+   file.write("- Товары без поступлений, но с отгрузкой:\n")
+   for word in result_prod:
+      file.write(f"{word}\n")
+   file.write("- Товар с максимальным поступлением:\n")
+   for key, value in max_in.items():
+      file.write(f"Товар {key} = {value} шт.\n")
+   file.write("- Товар с максимальной отгрузкой:\n")
+   for key, value in max_out.items():
+      file.write(f"Товар {key} = {value} шт.\n")
+   file.write("- Даты операций с яблоком:\n")
+   for date in date_apple:
+      file.write(f"Операции были {date}\n")
