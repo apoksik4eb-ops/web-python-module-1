@@ -5,7 +5,7 @@ West: {'total': 2, 'delayed': 1}
 South: {'total': 2, 'delayed': 1}
 
 - список городов:
-Chicago,Miami,Dallas,Boston,Atlanta
+Boston,Atlanta,Miami,Dallas,Chicago
 
 - дубликаты shipment_id:
 SHP-1002
