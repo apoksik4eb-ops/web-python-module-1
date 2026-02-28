@@ -1,11 +1,11 @@
 - статистика по складам:
-North: {'total': 3, 'delayed': 2}
-East: {'total': 2, 'delayed': 1}
-West: {'total': 2, 'delayed': 1}
-South: {'total': 2, 'delayed': 1}
+Склад North: всего заявок - 3, отложенных - 2.
+Склад East: всего заявок - 2, отложенных - 1.
+Склад West: всего заявок - 2, отложенных - 1.
+Склад South: всего заявок - 2, отложенных - 1.
 
 - список городов:
-Boston,Atlanta,Miami,Dallas,Chicago
+Boston, Atlanta, Chicago, Miami, Dallas
 
 - дубликаты shipment_id:
 SHP-1002
