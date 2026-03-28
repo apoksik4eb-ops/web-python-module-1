@@ -126,4 +126,4 @@ def preorder(node: Optional[TreeNode]) -> None:
     preorder(node.right)
 
 print("Обход:")
-print(root)
+preorder(root)
