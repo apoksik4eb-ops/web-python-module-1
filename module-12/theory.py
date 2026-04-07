@@ -26,10 +26,10 @@ class NotificationFactory:
             return EmailSender()
         if channel == "sms":
             return SmsSender()
-        raise ValueError("Unknow channel")
+        raise ValueError("Unknown channel")
 
 sender = NotificationFactory.create("sms")
-sender.send("Ваш код подтверждения 1234")
+print(sender.send("Ваш код подтверждения 1234"))
 
 # Abstract Factory
 
@@ -78,7 +78,7 @@ class LaptopBuilder:
             "cpu": "intel i5",
             "ram": 8,
             "ssd": 256,
-            "gpu": "intergrated"
+            "gpu": "integrated"
         }
 
     def for_study(self):
@@ -94,7 +94,7 @@ class LaptopBuilder:
 
     def with_cpu(self, cpu):
         self.laptop["cpu"] = cpu
-        return 
+        return self
         
     def build(self):
         return self.laptop.copy()
@@ -106,7 +106,7 @@ print(LaptopBuilder().for_study().with_cpu("Intel i7").build())
 import copy
 
 template_order = {
-    "delivery": "standart",
+    "delivery": "standard",
     "promo": False,
     "items": ["book"]
 }
@@ -143,14 +143,14 @@ class Radio:
     def turn_on(self):
         return "Radio is on"
 
-class RemoveControl:
+class RemoteControl:
     def __init__(self, device):
         self.device = device
 
     def power(self):
         return self.device.turn_on()
 
-print(RemoveControl(TV()).power())
+print(RemoteControl(TV()).power())
 
 # Composite
 
@@ -198,7 +198,7 @@ class MilkDecorator:
     def description(self):
         return self.drink.description() + ", молоко"
 
-class SypupDecorator:
+class SyrupDecorator:
     def __init__(self, drink):
         self.drink = drink
 
@@ -208,7 +208,7 @@ class SypupDecorator:
     def description(self):
         return self.drink.description() + ", сироп"
 
-drink = SypupDecorator(MilkDecorator(Coffee()))
+drink = SyrupDecorator(MilkDecorator(Coffee()))
 print(drink.price(), drink.description())
 
 # Facade
@@ -277,17 +277,17 @@ class ImageProxy:
         self.path = path
         self._real = None
 
-    def show():
+    def show(self):
         if self._real is None:
             self._real = Image(self.path)
 
         self._real.show()
 
-img = Image("photo.png")
+img = ImageProxy("photo.png")
 img.show() # загрузка
 img.show() # пусто
 
-# Поведенченские паттерны
+# Поведенческие паттерны
 # Chain of Responsibility
 
 class Handler:
@@ -395,7 +395,7 @@ class Order:
     def subscribe(self, listener):
         self.subscribers.append(listener)
 
-     def set_status(self, status):
+    def set_status(self, status):
         for subscriber in self.subscribers:
             subscriber(status)
 
