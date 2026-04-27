@@ -110,5 +110,9 @@ class FileOrderSaver:
 def create_ingredients():
     return {
         "dough": Ingredient("Тесто", "dough", 70, 30),
-        "cheese":
+        "cheese": Ingredient("Сыр", "cheese", 80, 20),
+        "tomate": Ingredient("Помидор", "tomate", 20, 5),
+        "mayonaise": Ingredient("Майонез","mayonaise", 50, 10),
+        "chicken": Ingredient("Курица", "chicken", 100, 50),
+        "ketchup": Ingredient("Кетчуп", "ketchup", 15, 3)
     }
