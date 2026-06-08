@@ -8,8 +8,8 @@ class BadReport:
 
     def as_text(self):
         lines = [self.title, "-" * len(self.rows)]
-        for row in rows:
-            line.append(f"{row["name"]}: {row["value"]}")
+        for row in self.rows:
+            lines.append(f"{row["name"]}: {row["value"]}")
         return "\n".join(lines)
 
     def save(self, filename):
@@ -17,7 +17,7 @@ class BadReport:
             file.write(self.as_text())
 
 # Хороший пример
-import dataclasses from dataclass
+from dataclasses import dataclass
 
 @dataclass
 class Report:
@@ -28,7 +28,7 @@ class TextReportFormatter:
     def format(self, report: Report) -> str:
         lines = [report.title, "-" * len(self.rows)]
         for row in report.rows:
-            line.append(f"{row["name"]}: {row["value"]}")
+            lines.append(f"{row["name"]}: {row["value"]}")
         return "\n".join(lines)
 
 class FileStorage:
@@ -42,7 +42,7 @@ print(TextReportFormatter().format(report))
 # O - Open/Closed
 
 # Плохой пример
-def calculate_discont_bad(costomer_type: str, amount: float) -> float:
+def calculate_discont_bad(customer_type: str, amount: float) -> float:
     if customer_type == "regular":
         return amount * 0.05
     if customer_type == "vip":
@@ -132,7 +132,7 @@ Pinguin("Пингвин").swim()
 # I - Interface Segregation (Принцип разделения интерфейса)
 
 # Плохой пример
-import abc from ABC, abstractmethod
+from abc import ABC, abstractmethod
 
 class BadDiviceOffice(ABC):
     @abstractmethod
@@ -158,7 +158,7 @@ class Printer(BadDiviceOffice):
         raise NotImplementedError("Принтер не отправляет факс")
 
 # Хороший пример
-import typing from Protocol
+from typing import Protocol
 
 class Printer(Protocol):
     def print_document(self, text: str) -> None:
